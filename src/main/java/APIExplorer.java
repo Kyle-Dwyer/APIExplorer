@@ -48,12 +48,10 @@ public class APIExplorer {
                     ql.repair(currentState, action);
                 }
             }
+            System.out.println("本轮请求序列为：" + path + "\n");
             sequence.add(path);
         }
         System.out.println(sequence);
         ql.finish();
-//        ql.calculateQ();
-//        ql.printQ();
-//        ql.printPolicy();
     }
 }

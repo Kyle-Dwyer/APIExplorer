@@ -32,7 +32,7 @@ public class Utils {
                 }
                 String first = st.substring(0, st.indexOf("->")).trim();
                 String second = st.substring(st.indexOf("->") + 2, st.indexOf("[")).trim();
-                matrix[Integer.parseInt(first) - 1][Integer.parseInt(second) - 1] = 1;
+                matrix[Integer.parseInt(second) - 1][Integer.parseInt(first) - 1] = 1;
             } while ((st = br.readLine()) != null);
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class Utils {
     }
 
     public static int random(double[] weight) {
-        List<Double> weightTmp = new ArrayList<Double>(weight.length + 1);
+        List<Double> weightTmp = new ArrayList<>(weight.length + 1);
         weightTmp.add(0.0);
         double sum = 0;
         for (double d : weight) {

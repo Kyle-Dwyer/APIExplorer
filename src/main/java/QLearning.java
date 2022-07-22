@@ -68,16 +68,11 @@ public class QLearning {
         //更新Q
         updateQ(previousState, action, curiosity);
         //更新optionalActionList
-        optionalActionList.remove(new Integer(previousState));
+        boolean result;
+        do {
+            result = optionalActionList.remove(new Integer(action));
+        } while (result);
         optionalActionList.addAll(edges.get(action));
-
-        // Q(state,action)= Q(state,action) + alpha * (R(state,action) + gamma * Max(next state, all actions) - Q(state,action))
-//                double q = Q[crtState][nextState];
-//                double maxQ = maxQ(nextState);
-//                int r = N[crtState][nextState];
-//
-//                double value = q + alpha * (r + gamma * maxQ - q);
-//                Q[crtState][nextState] = value;
     }
 
     void repair(int previous, int action) {
@@ -97,6 +92,7 @@ public class QLearning {
     }
 
     int getPolicyFromState(int state) {
+        System.out.println(optionalActionList);
         //没有可以执行的请求了
         if (optionalActionList.size() == 0)
             return -1;
