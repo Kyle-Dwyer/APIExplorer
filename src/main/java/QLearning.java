@@ -83,9 +83,10 @@ public class QLearning {
     //Gumbel-Softmax分布
     double[] calculateWeight(NDArray ndOptionalQValue) {
         // 首先创造U(0,1)
-        NDArray union = manager.randomUniform(0, 1, ndOptionalQValue.getShape());
-        // Gumbel-Max Trick
-        NDArray gumbel = union.add(ndOptionalQValue).div(tau);
+        NDArray union = manager.randomUniform((float) 1e-20, (float) (1-1e-20), ndOptionalQValue.getShape());
+        // Gumbel(0,1)
+        NDArray noise = union.log().mul(-1).log().mul(-1);
+        NDArray gumbel = noise.add(ndOptionalQValue).div(tau);
         // Softmax
         NDArray gumbelSoftmax = gumbel.softmax(0);
         return gumbelSoftmax.toDoubleArray();
